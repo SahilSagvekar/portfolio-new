@@ -6,6 +6,9 @@ import ProjectsShowcase from "./ProjectsShowcase";
 import SkillsSection from "./SkillsSection";
 import ContactSection from "./ContactSection";
 import { TypeAnimation } from "react-type-animation";
+import { PixelTrail } from "../fancy/components/background/pixel-trail";
+
+
 
 const Home = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -18,6 +21,7 @@ const Home = () => {
 
   return (
     <div className={`min-h-screen bg-background ${isDarkMode ? "dark" : ""}`}>
+
       {/* Navigation */}
       <header className="sticky top-0 z-10 bg-background border-b border-border py-4 px-6 md:px-12">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -104,7 +108,7 @@ const Home = () => {
               <div className="absolute -z-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
               <Avatar className="w-64 h-64 border-4 border-primary/20">
                 <AvatarImage
-                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=developer"
+                  src="/me.png"
                   alt="Developer Avatar"
                 />
                 <AvatarFallback>AD</AvatarFallback>

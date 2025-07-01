@@ -91,19 +91,19 @@ const ProjectModal = ({
 
             <div>
               <h3 className="text-lg font-semibold mb-2">
-                Challenges & Solutions
+                {/* Challenges & Solutions */}
               </h3>
-              <p className="text-muted-foreground">{project.challenges}</p>
+              {/* <p className="text-muted-foreground">{project.challenges}</p> */}
             </div>
 
             <div className="flex flex-wrap gap-6">
               <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">{project.date}</span>
+                {/* <Calendar className="h-4 w-4 text-muted-foreground" /> */}
+                {/* <span className="text-sm">{project.date}</span> */}
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">Duration: {project.duration}</span>
+                {/* <Clock className="h-4 w-4 text-muted-foreground" /> */}
+                {/* <span className="text-sm">Duration: {project.duration}</span> */}
               </div>
             </div>
           </div>

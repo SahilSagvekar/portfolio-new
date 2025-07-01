@@ -145,84 +145,85 @@ const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({
 const defaultProjects: Project[] = [
   {
     id: "1",
-    title: "E-commerce Platform",
+    title: "Doctors Appointment Website",
     description:
-      "A full-featured online store with product catalog, shopping cart, user accounts, and payment processing.",
+      "A seamless online platform for booking and managing doctor appointments with ease and convenience.",
     category: "web",
     image:
-      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe API", "Redux"],
-    liveUrl: "https://example.com/ecommerce",
-    repoUrl: "https://github.com/example/ecommerce",
+      "/doctorappointment.png",
+    technologies: ["React", "Next-JS", "Tailwind CSS", "NeonDB", "Prisma", "Clerk", "Vonage", "Shadcn UI" ],
+    liveUrl: "https://doctors-appointment-lac.vercel.app/",
+    repoUrl: "https://github.com/SahilSagvekar/doctors-appointment.git",
     client: "RetailCo Inc.",
-    duration: "3 months",
+    // duration: "3 months",
     challenge:
       "Implementing a secure payment system while maintaining a smooth user experience.",
   },
-  {
+   {
     id: "2",
-    title: "Health & Fitness App",
-    description:
-      "Mobile application for tracking workouts, nutrition, and personal health metrics with customized recommendations.",
-    category: "mobile",
-    image:
-      "https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800&q=80",
-    technologies: ["React Native", "Firebase", "GraphQL", "TensorFlow.js"],
-    liveUrl: "https://apps.example.com/fitness",
-    repoUrl: "https://github.com/example/fitness-app",
-    duration: "4 months",
-    challenge:
-      "Creating an algorithm for personalized workout recommendations based on user data.",
-  },
-  {
-    id: "3",
-    title: "Corporate Dashboard",
+    title: "Digital Marketing Agency Website",
     description:
       "Data visualization dashboard for business analytics with real-time updates and interactive charts.",
     category: "web",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-    technologies: ["Vue.js", "D3.js", "Express", "PostgreSQL", "WebSockets"],
-    liveUrl: "https://example.com/dashboard",
-    repoUrl: "https://github.com/example/dashboard",
-    client: "DataCorp Analytics",
-    duration: "2 months",
+      "/digital.png",
+    technologies: ["Next", "TailwindCSS", "stripe", "Aceternity UI", "shadcn/ui"],
+    liveUrl: "https://digital-marketing-kappa.vercel.app/",
+    repoUrl: "https://github.com/SahilSagvekar/Digital-Marketing-Agency-Website",
+    // client: "DataCorp Analytics",
+    // duration: "2 months",
     challenge:
       "Optimizing performance for real-time data visualization with large datasets.",
   },
   {
+    id: "3",
+    title: "Artshop Website",
+    description:
+      "Ecommerce store built using next js 14 , sanity for admin dashboard to crud products , stripe for payments and zustand for shopping cart global state management.",
+    category: "web",
+    image:
+      "/artshop.png",
+    technologies: ["Next", "TailwindCSS", "stripe"],
+    liveUrl: "https://next-artshop-gilt.vercel.app/",
+    repoUrl: "https://github.com/SahilSagvekar/NEXT-artshop",
+    // duration: "4 months",
+    challenge:
+      "Creating an algorithm for personalized workout recommendations based on user data.",
+  },
+ 
+  {
     id: "4",
-    title: "Community Forum",
+    title: "Coffee Website",
     description:
       "Online discussion platform with user profiles, topic categories, and moderation tools.",
     category: "web",
     image:
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80",
+      "/coffee.png",
     technologies: [
-      "Next.js",
-      "Prisma",
-      "PostgreSQL",
-      "Socket.io",
-      "Tailwind CSS",
+      "React",
+      "CSS",
     ],
-    liveUrl: "https://example.com/forum",
-    repoUrl: "https://github.com/example/forum",
-    duration: "3 months",
+    liveUrl: "https://react-coffee-website.vercel.app/",
+    repoUrl: "https://github.com/SahilSagvekar/React-coffee-Website",
+    // duration: "3 months",
     challenge: "Building a scalable notification system for user interactions.",
   },
   {
     id: "5",
-    title: "Travel Companion App",
+    title: "React Food App",
     description:
       "Mobile app for travelers with itinerary planning, local recommendations, and offline maps.",
     category: "mobile",
     image:
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
-    technologies: ["Flutter", "Firebase", "Google Maps API", "TripAdvisor API"],
-    liveUrl: "https://apps.example.com/travel",
-    repoUrl: "https://github.com/example/travel-app",
+      "/food.png",
+    technologies: [
+      "React",
+      "CSS",
+    ],
+    liveUrl: "https://react-food-app-azure-three.vercel.app",
+    repoUrl: "https://github.com/SahilSagvekar/React-Food-App",
     client: "Wanderlust Ventures",
-    duration: "5 months",
+    // duration: "5 months",
     challenge:
       "Implementing efficient offline data storage and synchronization.",
   },
@@ -237,7 +238,7 @@ const defaultProjects: Project[] = [
     technologies: ["React", "Framer Motion", "Tailwind CSS", "Vite"],
     liveUrl: "https://example.com/portfolio",
     repoUrl: "https://github.com/example/portfolio",
-    duration: "3 weeks",
+    // duration: "3 weeks",
     challenge: "Creating engaging animations without compromising performance.",
   },
 ];
