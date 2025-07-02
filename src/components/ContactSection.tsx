@@ -120,10 +120,10 @@ const ContactSection = () => {
                   <div>
                     <p className="font-medium">Email</p>
                     <a
-                      href="mailto:hello@yourwebsite.com"
+                      href="mailto:sahilsagvekar230@gmail.com"
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      hello@yourwebsite.com
+                      sahilsagvekar230@gmail.com
                     </a>
                   </div>
                 </div>
@@ -135,10 +135,10 @@ const ContactSection = () => {
                   <div>
                     <p className="font-medium">Phone</p>
                     <a
-                      href="tel:+1234567890"
+                      href="tel:+918779989858"
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      +1 (234) 567-890
+                      +91 8779989858
                     </a>
                   </div>
                 </div>
@@ -147,7 +147,7 @@ const ContactSection = () => {
                   <p className="font-medium mb-4">Connect with me</p>
                   <div className="flex gap-4">
                     <a
-                      href="https://github.com"
+                      href="https://github.com/SahilSagvekar"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-muted hover:bg-muted/80 p-3 rounded-full transition-colors"
@@ -156,7 +156,7 @@ const ContactSection = () => {
                       <span className="sr-only">GitHub</span>
                     </a>
                     <a
-                      href="https://linkedin.com"
+                      href="https://www.linkedin.com/in/sahil-sagvekar/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-muted hover:bg-muted/80 p-3 rounded-full transition-colors"
@@ -165,7 +165,7 @@ const ContactSection = () => {
                       <span className="sr-only">LinkedIn</span>
                     </a>
                     <a
-                      href="https://twitter.com"
+                      href="https://x.com/Sahilsagvekar23"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-muted hover:bg-muted/80 p-3 rounded-full transition-colors"
@@ -173,7 +173,7 @@ const ContactSection = () => {
                       <Twitter className="h-5 w-5" />
                       <span className="sr-only">Twitter</span>
                     </a>
-                    <a
+                    {/* <a
                       href="https://yourportfolio.com"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -181,7 +181,7 @@ const ContactSection = () => {
                     >
                       <ExternalLink className="h-5 w-5" />
                       <span className="sr-only">Portfolio</span>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </CardContent>

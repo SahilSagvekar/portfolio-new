@@ -47,16 +47,16 @@ const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({
   return (
     <section className="py-16 px-4 md:px-8 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
+        {/* <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">My Projects</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Explore my recent work across various domains and technologies. Each
             project demonstrates my approach to problem-solving and technical
             implementation.
           </p>
-        </div>
+        </div> */}
 
-        <Tabs
+        {/* <Tabs
           defaultValue="all"
           value={activeTab}
           onValueChange={setActiveTab}
@@ -74,9 +74,9 @@ const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({
                 </TabsTrigger>
               ))}
             </TabsList>
-          </div>
+          </div> */}
 
-          <TabsContent value={activeTab} className="mt-0">
+          {/* <TabsContent value={activeTab} className="mt-0"> */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProjects.map((project) => (
                 <div
@@ -114,8 +114,8 @@ const ProjectsShowcase: React.FC<ProjectsShowcaseProps> = ({
                 </div>
               ))}
             </div>
-          </TabsContent>
-        </Tabs>
+          {/* </TabsContent>
+        </Tabs> */}
 
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">

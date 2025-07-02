@@ -8,8 +8,6 @@ import ContactSection from "./ContactSection";
 import { TypeAnimation } from "react-type-animation";
 import { PixelTrail } from "../fancy/components/background/pixel-trail";
 
-
-
 const Home = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -21,7 +19,6 @@ const Home = () => {
 
   return (
     <div className={`min-h-screen bg-background ${isDarkMode ? "dark" : ""}`}>
-
       {/* Navigation */}
       <header className="sticky top-0 z-10 bg-background border-b border-border py-4 px-6 md:px-12">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -56,7 +53,15 @@ const Home = () => {
                 <Moon className="h-5 w-5" />
               )}
             </Button>
-            <Button className="hidden md:inline-flex">Hire Me</Button>
+            <a
+              href="https://calendly.com/sahilsagvekar230/meet"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" className="font-medium">
+                Hire Me
+              </Button>
+            </a>
           </div>
         </div>
       </header>
@@ -70,7 +75,7 @@ const Home = () => {
               Freelance Web Developer
             </h1> */}
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
-              Hi, I'm <span className="text-primary">Alex</span>
+              Hi, I'm <span className="text-primary">Sahil</span>
               <br />
               <TypeAnimation
                 sequence={[
@@ -95,10 +100,35 @@ const Home = () => {
               help businesses grow online.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="font-medium">
+              {/* <Button size="lg" className="font-medium">
+                View My Work
+              </Button> */}
+              <Button
+                size="lg"
+                className="font-medium"
+                onClick={() => {
+                  const section = document.getElementById("projects");
+                  if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
                 View My Work
               </Button>
-              <Button size="lg" variant="outline" className="font-medium">
+              {/* <Button size="lg" variant="outline" className="font-medium">
+                Contact Me
+              </Button> */}
+              <Button
+                size="lg"
+                variant="outline"
+                className="font-medium"
+                onClick={() => {
+                  const section = document.getElementById("contact");
+                  if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
                 Contact Me
               </Button>
             </div>
@@ -107,10 +137,7 @@ const Home = () => {
             <div className="relative">
               <div className="absolute -z-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
               <Avatar className="w-64 h-64 border-4 border-primary/20">
-                <AvatarImage
-                  src="/me.png"
-                  alt="Developer Avatar"
-                />
+                <AvatarImage src="/me.png" alt="Developer Avatar" />
                 <AvatarFallback>AD</AvatarFallback>
               </Avatar>
             </div>
@@ -160,8 +187,8 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 md:px-12 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
+      {/* <section id="contact" className="py-20 px-6 md:px-12 bg-muted/30"> */}
+      {/* <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Get In Touch
@@ -171,10 +198,10 @@ const Home = () => {
               ideas to life. Fill out the form below and I'll get back to you
               soon.
             </p>
-          </div>
-          <ContactSection />
-        </div>
-      </section>
+          </div>  */}
+      <ContactSection />
+      {/* </div>
+      </section>  */}
 
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 bg-background border-t border-border">
