@@ -38,31 +38,29 @@ export default function Home() {
   });
 
   return (
-    
     <section className="min-h-screen bg-[#0e0e0e] text-white flex flex-col md:flex-row">
-
       <motion.div
-  animate={{
-    y: [0, -10, 0],
-    scale: [1, 1.05, 1],
-  }}
-  transition={{
-    repeat: Infinity,
-    duration: 2,
-    ease: "easeInOut",
-  }}
-  className="fixed z-50 top-10 left-6 sm:right-10 sm:left-auto bg-gradient-to-r from-emerald-400 to-cyan-500 px-6 py-3 rounded-full shadow-lg"
->
-  <a
-    href="https://calendly.com/your-calendly-link"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <Button className="text-white text-base font-semibold hover:scale-105 transition-transform duration-300">
-      Hire Me
-    </Button>
-  </a>
-</motion.div>
+        animate={{
+          y: [0, -10, 0],
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 2,
+          ease: "easeInOut",
+        }}
+        className="fixed z-50 top-10 left-6 sm:right-10 sm:left-auto bg-gradient-to-r from-emerald-400 to-cyan-500 px-6 py-3 rounded-full shadow-lg"
+      >
+        <a
+          href="https://calendly.com/sahilsagvekar230/new-meeting-1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button className="text-white text-base font-semibold hover:scale-105 transition-transform duration-300">
+            Hire Me
+          </Button>
+        </a>
+      </motion.div>
 
       {/* Sidebar Navigation */}
       <motion.aside
@@ -74,7 +72,7 @@ export default function Home() {
         <h1 className="text-base font-semibold tracking-wide mb-10 fixed text-gray-300">
           SAHIL SAGVEKAR
         </h1>
-        
+
         <nav className="space-y-2 text-sm p-6 mt-32 fixed left-0 top-20 w-52">
           {sections.map((section) => (
             <a
