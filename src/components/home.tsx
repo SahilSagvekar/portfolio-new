@@ -129,10 +129,22 @@ export default function Home() {
               transition={{ delay: 0.6 }}
               className="flex gap-4 mt-4"
             >
-              <button className="bg-emerald-400 hover:bg-emerald-300 text-black font-semibold py-3 px-6 rounded-full shadow-lg transition-all duration-300">
+              <button
+                onClick={() => {
+                  const el = document.getElementById("contact");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="bg-emerald-400 hover:bg-emerald-300 text-black font-semibold py-3 px-6 rounded-full shadow-lg transition-all duration-300"
+              >
                 Get in touch
               </button>
-              <button className="border border-emerald-400 text-emerald-400 hover:bg-emerald-900 font-semibold py-3 px-6 rounded-full transition-all duration-300">
+              <button
+                onClick={() => {
+                  const el = document.getElementById("experience");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="border border-emerald-400 text-emerald-400 hover:bg-emerald-900 font-semibold py-3 px-6 rounded-full transition-all duration-300"
+              >
                 My work
               </button>
             </motion.div>
@@ -153,24 +165,306 @@ export default function Home() {
           </h3>
 
           <div className="grid md:grid-cols-2 gap-12">
-            {[...Array(6)].map((_, index) => (
-              <div
-                key={index}
-                className="relative rounded-2xl overflow-hidden border border-emerald-400 p-8 bg-[#121212] hover:shadow-[0_0_30px_#34d399] transition-shadow duration-300"
-              >
-                <div className="absolute top-4 right-4 text-emerald-400 text-xl">
-                  ↗
-                </div>
-                <h4 className="text-2xl font-bold text-white mb-4">
-                  SampleFlat
-                </h4>
-                <p className="text-gray-400 text-sm">
-                  A full-fledged real estate marketplace with buyer-seller video
-                  calls, bookings, and Stripe payments.
-                </p>
-                <p className="text-gray-500 text-xs mt-4">2024 | Full-stack</p>
+            {/* Project 1 */}
+            <div className="relative rounded-2xl overflow-hidden border border-emerald-400 p-8 bg-[#121212] hover:shadow-[0_0_30px_#34d399] transition-shadow duration-300">
+              {/* Icons for links */}
+              <div className="absolute top-4 right-4 flex gap-3 text-emerald-400 text-xl">
+                <a
+                  href="https://github.com/SahilSagvekar/doctors-appointment"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="GitHub Repo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.8-1.5-3.8-1.5-.6-1.4-1.4-1.7-1.4-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.3 1.8 1.3 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.5.5.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://doctors-appointment-lac.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="Live Demo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3z" />
+                    <path d="M5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z" />
+                  </svg>
+                </a>
               </div>
-            ))}
+
+              {/* Card Content */}
+              <h4 className="text-2xl font-bold text-white mb-4">
+                Doctors Appointment Website
+              </h4>
+              <p className="text-gray-400 text-sm">
+                A seamless online platform for booking and managing doctor
+                appointments with ease and convenience.
+              </p>
+              <p className="text-gray-500 text-xs mt-4">
+                Technologies Used | React, Next-JS, Tailwind CSS NeonDB Prisma
+                Clerk Vonage Shadcn UI
+              </p>
+            </div>
+
+            {/* Project 2 */}
+            <div className="relative rounded-2xl overflow-hidden border border-emerald-400 p-8 bg-[#121212] hover:shadow-[0_0_30px_#34d399] transition-shadow duration-300">
+              {/* Icons for links */}
+              <div className="absolute top-4 right-4 flex gap-3 text-emerald-400 text-xl">
+                <a
+                  href="https://github.com/SahilSagvekar/Digital-Marketing-Agency-Website"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="GitHub Repo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.8-1.5-3.8-1.5-.6-1.4-1.4-1.7-1.4-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.3 1.8 1.3 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.5.5.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://digital-marketing-kappa.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="Live Demo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3z" />
+                    <path d="M5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Card Content */}
+              <h4 className="text-2xl font-bold text-white mb-4">
+                Digital Marketing Agency Website
+              </h4>
+              <p className="text-gray-400 text-sm">
+                Data visualization dashboard for business analytics with
+                real-time updates and interactive charts.
+              </p>
+              <p className="text-gray-500 text-xs mt-4">
+                {" "}
+                Technologies Used | Next, TailwindCSS, stripe, Aceternity UI, shadcn/ui
+              </p>
+            </div>
+
+            {/* Project 3 */}
+            <div className="relative rounded-2xl overflow-hidden border border-emerald-400 p-8 bg-[#121212] hover:shadow-[0_0_30px_#34d399] transition-shadow duration-300">
+              {/* Icons for links */}
+              <div className="absolute top-4 right-4 flex gap-3 text-emerald-400 text-xl">
+                <a
+                  href="https://github.com/SahilSagvekar/NEXT-artshop"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="GitHub Repo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.8-1.5-3.8-1.5-.6-1.4-1.4-1.7-1.4-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.3 1.8 1.3 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.5.5.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://next-artshop-gilt.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="Live Demo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3z" />
+                    <path d="M5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Card Content */}
+              <h4 className="text-2xl font-bold text-white mb-4">Artshop Website</h4>
+              <p className="text-gray-400 text-sm">
+               Ecommerce store built using next js 14 , sanity for admin dashboard to crud products , stripe for payments and zustand for shopping cart global state management.
+              </p>
+              <p className="text-gray-500 text-xs mt-4"> Technologies Used | Next, TailwindCSS, stripe, shadcn/ui</p>
+            </div>
+
+            {/* Project 4 */}
+            <div className="relative rounded-2xl overflow-hidden border border-emerald-400 p-8 bg-[#121212] hover:shadow-[0_0_30px_#34d399] transition-shadow duration-300">
+              {/* Icons for links */}
+              <div className="absolute top-4 right-4 flex gap-3 text-emerald-400 text-xl">
+                <a
+                  href="https://github.com/SahilSagvekar/sample-flat"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="GitHub Repo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.8-1.5-3.8-1.5-.6-1.4-1.4-1.7-1.4-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.3 1.8 1.3 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.5.5.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://sample-flat.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="Live Demo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3z" />
+                    <path d="M5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Card Content */}
+              <h4 className="text-2xl font-bold text-white mb-4">SampleFlat</h4>
+              <p className="text-gray-400 text-sm">
+               TheSampleFlat is a real estate platform that focuses on showcasing new and 
+under-construction properties with immersive video content
+              </p>
+              <p className="text-gray-500 text-xs mt-4">Technologies Used | Next.js, TypeScript, Tailwind CSS, Prisma, MongoDB, Stripe, Shadcn/UI, Zod, Resend / Nodemailer</p>
+            </div>
+
+            {/* Project 5 */}
+            <div className="relative rounded-2xl overflow-hidden border border-emerald-400 p-8 bg-[#121212] hover:shadow-[0_0_30px_#34d399] transition-shadow duration-300">
+              {/* Icons for links */}
+              <div className="absolute top-4 right-4 flex gap-3 text-emerald-400 text-xl">
+                <a
+                  href="https://github.com/SahilSagvekar/React-coffee-Website"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="GitHub Repo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.8-1.5-3.8-1.5-.6-1.4-1.4-1.7-1.4-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.3 1.8 1.3 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.5.5.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://react-coffee-website.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="Live Demo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3z" />
+                    <path d="M5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Card Content */}
+              <h4 className="text-2xl font-bold text-white mb-4">Coffee Website</h4>
+              <p className="text-gray-400 text-sm">
+                Bueatifully designed coffee website with a modern UI, showcasing various coffee products and their details.
+              </p>
+              <p className="text-gray-500 text-xs mt-4">Technologies Used | React, Tailwind CSS</p>
+            </div>
+
+            {/* Project 6 */}
+            <div className="relative rounded-2xl overflow-hidden border border-emerald-400 p-8 bg-[#121212] hover:shadow-[0_0_30px_#34d399] transition-shadow duration-300">
+              {/* Icons for links */}
+              <div className="absolute top-4 right-4 flex gap-3 text-emerald-400 text-xl">
+                <a
+                  href="https://github.com/SahilSagvekar/React-Food-App"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="GitHub Repo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.8-1.5-3.8-1.5-.6-1.4-1.4-1.7-1.4-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.3 1.8 1.3 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.5.5.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://react-food-app-azure-three.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                  title="Live Demo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3z" />
+                    <path d="M5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Card Content */}
+              <h4 className="text-2xl font-bold text-white mb-4">React Food App</h4>
+              <p className="text-gray-400 text-sm">
+                A simple food ordering application built with React, showcasing various food items and their details.
+              </p>
+              <p className="text-gray-500 text-xs mt-4">Technologies Used | React, Tailwind CSS</p>
+            </div>
           </div>
         </motion.section>
 
