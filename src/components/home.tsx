@@ -7,11 +7,57 @@ import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
+import axios from "axios";
 
 // Define all sections for navigation tracking
 const sections = ["intro", "work", "experience", "skills", "contact"];
 
 export default function Home() {
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [responseMsg, setResponseMsg] = useState("");
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setResponseMsg("");
+
+    try {
+      const res = await fetch("http://localhost:5050/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setResponseMsg("✅ Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setResponseMsg("❌ Failed to send message. Please try again.");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      setResponseMsg("❌ Something went wrong. Try again later.");
+    }
+
+    setLoading(false);
+  };
   // State to track the currently active section
   const [activeSection, setActiveSection] = useState("intro");
 
@@ -207,7 +253,7 @@ export default function Home() {
 
               {/* Card Content */}
               <h4 className="text-2xl font-bold text-white mb-4">
-                Doctors Appointment Website
+                Doctors Appointment Platform
               </h4>
               <p className="text-gray-400 text-sm">
                 A seamless online platform for booking and managing doctor
@@ -538,7 +584,8 @@ under-construction properties with immersive video content
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="min-h-screen bg-[#0e0e0e] text-white px-6 md:px-24 py-20 border-t border-emerald-400"
+          // className="min-h-screen bg-[#0e0e0e] text-white px-6 md:px-24 py-20 border-t border-emerald-400"
+          className="min-h-screen bg-[#0e0e0e] text-white  py-20 border-t border-emerald-400 pl-0 ml-0 mr-10 pr-20"
         >
           <h2 className="font-sans text-4xl md:text-5xl font-bold mb-20">
             Skills
@@ -572,7 +619,7 @@ under-construction properties with immersive video content
                     <img
                       src={skill.icon}
                       alt={skill.name}
-                      className="w-29 h-29 object-contain"
+                      className="w-25 h-21 object-contain"
                     />
                   </div>
                 </div>
@@ -582,75 +629,89 @@ under-construction properties with immersive video content
         </motion.section>
 
         {/* Contact Section */}
-        <section
-          id="contact"
-          className="px-6 md:px-24 py-24 text-white border-t border-emerald-400 bg-[#0e0e0e]"
-        >
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
-            {/* Left: Contact Form */}
-            <div className="flex-1 w-full">
-              <h2 className="text-3xl font-bold text-emerald-400 mb-8">
-                Let’s work together
-              </h2>
+       <section
+      id="contact"
+      className="px-6 md:px-24 py-24 text-white border-t border-emerald-400 bg-[#0e0e0e]"
+    >
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+        {/* Left: Contact Form */}
+        <div className="flex-1 w-full">
+          <h2 className="text-3xl font-bold text-emerald-400 mb-8">
+            Let’s work together
+          </h2>
 
-              <p className="text-lg text-gray-300 mb-8 max-w-2xl">
-                Whether you have a question, want to collaborate, or just want
-                to say hi — feel free to drop a message. I’ll try my best to get
-                back to you!
-              </p>
+          <p className="text-lg text-gray-300 mb-8 max-w-2xl">
+            Whether you have a question, want to collaborate, or just want to say hi — feel free to drop a message. I’ll try my best to get back to you!
+          </p>
 
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-gray-300">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                    placeholder="Your Name"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-gray-300">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                    placeholder="your@email.com"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-gray-300">
-                    Message
-                  </label>
-                  <textarea
-                    className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white h-32 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                    placeholder="Let's talk about your next project..."
-                  ></textarea>
-                </div>
-
-                <button className="mt-4 bg-emerald-400 text-black px-6 py-3 rounded-md font-semibold hover:bg-emerald-500 transition-colors duration-300">
-                  Send Message
-                </button>
-              </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-gray-300">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="Your Name"
+                required
+              />
             </div>
 
-            {/* Right: Image */}
-            <div className="flex-1 w-full max-w-md">
-              <div className="flex-1 w-full max-w-md">
-                <Player
-                  autoplay
-                  loop
-                  src="https://assets5.lottiefiles.com/packages/lf20_zrqthn6o.json"
-                  style={{ height: "100%", width: "100%" }}
-                />
-              </div>
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-gray-300">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="your@email.com"
+                required
+              />
             </div>
-          </div>
-        </section>
+
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-gray-300">
+                Message
+              </label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white h-32 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="Let's talk about your next project..."
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              className="mt-4 bg-emerald-400 text-black px-6 py-3 rounded-md font-semibold hover:bg-emerald-500 transition-colors duration-300"
+              disabled={loading}
+            >
+              {loading ? "Sending..." : "Send Message"}
+            </button>
+
+            {responseMsg && <p className="text-sm mt-2">{responseMsg}</p>}
+          </form>
+        </div>
+
+        {/* Right: Animation */}
+        <div className="flex-1 w-full max-w-md">
+          <Player
+            autoplay
+            loop
+            src="https://assets5.lottiefiles.com/packages/lf20_zrqthn6o.json"
+            style={{ height: "100%", width: "100%" }}
+          />
+        </div>
+      </div>
+    </section>
       </motion.main>
     </section>
   );
