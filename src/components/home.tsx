@@ -214,7 +214,7 @@ export default function Home() {
           <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 text-white">
             My Work
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 mb-20">
             {/* Project 1 */}
             <div className="relative rounded-2xl overflow-hidden border border-emerald-400 p-8 bg-[#121212] hover:shadow-[0_0_30px_#34d399] transition-shadow duration-300">
               {/* Icons for links */}
