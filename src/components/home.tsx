@@ -10,6 +10,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import axios from "axios";
 
 // Define all sections for navigation tracking
+
 const sections = ["intro", "work", "experience", "skills", "contact"];
 
 export default function Home() {
@@ -78,69 +79,88 @@ export default function Home() {
   }, []);
 
   const { ref: workRef, inView: workInView } = useInView({
+    threshold: 0.2, // triggers earlier
     triggerOnce: true,
-    threshold: 0.2,
   });
 
   return (
     <section className="min-h-screen bg-[#0e0e0e] text-white flex flex-col md:flex-row">
       {/* Floating "Hire Me" Button */}
-<motion.div
-  animate={{
-    y: [0, -10, 0],
-    scale: [1, 1.05, 1],
-  }}
-  transition={{
-    repeat: Infinity,
-    duration: 2,
-    ease: "easeInOut",
-  }}
-  className="fixed z-50 top-4 left-4 sm:top-10 sm:left-auto sm:right-10 bg-gradient-to-r from-emerald-400 to-cyan-500 px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-lg"
->
-  <a
-    href="https://calendly.com/sahilsagvekar230/new-meeting-1"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <Button className="text-white text-sm sm:text-base font-semibold hover:scale-105 transition-transform duration-300">
-      Hire Me
-    </Button>
-  </a>
-</motion.div>
-
-{/* Sidebar Navigation (Hidden on small screens) */}
-<motion.aside
-  initial={{ x: -100, opacity: 0 }}
-  animate={{ x: 0, opacity: 1 }}
-  transition={{ duration: 0.8, ease: "easeOut" }}
-  className="hidden md:block md:w-1/4 px-6 py-8"
->
-  <h1 className="text-base font-semibold tracking-wide mb-10 fixed text-gray-300">
-    SAHIL SAGVEKAR
-  </h1>
-
-  <nav className="space-y-2 text-sm p-6 mt-32 fixed left-0 top-20 w-52">
-    {sections.map((section) => (
-      <a
-        href={`#${section}`}
-        key={section}
-        className={`relative block px-4 py-2 rounded-lg transition-all duration-300 transform ${
-          activeSection === section
-            ? "text-emerald-400 font-semibold scale-[1.03]"
-            : "text-gray-500 hover:text-emerald-400 hover:scale-[1.01]"
-        }`}
+      <motion.div
+        animate={{
+          y: [0, -10, 0],
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 2,
+          ease: "easeInOut",
+        }}
+        className="fixed z-50 top-4 left-4 sm:top-10 sm:left-auto sm:right-10 bg-gradient-to-r from-emerald-400 to-cyan-500 px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-lg"
       >
-        <span
-          className={`absolute left-0 top-0 h-full w-1 bg-emerald-400 rounded transition-all duration-300 ${
-            activeSection === section ? "opacity-100" : "opacity-0"
-          }`}
-        />
-        {section.charAt(0).toUpperCase() + section.slice(1)}
-      </a>
-    ))}
-  </nav>
-</motion.aside>
+        <a
+          href="https://calendly.com/sahilsagvekar230/new-meeting-1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button className="text-white text-sm sm:text-base font-semibold hover:scale-105 transition-transform duration-300">
+            Hire Me
+          </Button>
+        </a>
+      </motion.div>
 
+      {/* Sidebar Navigation (Hidden on small screens) */}
+      <motion.aside
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="hidden md:block md:w-1/4 px-6 py-8"
+      >
+        <h1 className="text-base font-semibold tracking-wide mb-10 fixed text-gray-300">
+          SAHIL SAGVEKAR
+        </h1>
+
+        {/* <nav className="space-y-3 text-base md:text-lg p-6 mt-32 fixed left-0 top-20 w-64">
+  {sections.map((section) => (
+    <a
+      href={`#${section}`}
+      key={section}
+      className={`relative block px-5 py-3 rounded-lg transition-all duration-300 transform ${
+        activeSection === section
+          ? "text-emerald-400 font-semibold scale-[1.03]"
+          : "text-gray-500 hover:text-emerald-400 hover:scale-[1.01]"
+      }`}
+    >
+      <span
+        className={`absolute left-0 top-0 h-full w-1 bg-emerald-400 rounded transition-all duration-300 ${
+          activeSection === section ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      {section.charAt(0).toUpperCase() + section.slice(1)}
+    </a>
+  ))}
+</nav> */}
+        <nav className="space-y-4 text-xl font-semibold p-6 mt-32 fixed left-0 top-20 w-80">
+          {sections.map((section) => (
+            <a
+              href={`#${section}`}
+              key={section}
+              className={`relative block px-6 py-4 rounded-xl transition-all duration-300 transform ${
+                activeSection === section
+                  ? "text-emerald-400 scale-105"
+                  : "text-gray-500 hover:text-emerald-400 hover:scale-105"
+              }`}
+            >
+              <span
+                className={`absolute left-0 top-0 h-full w-1 bg-emerald-400 rounded transition-all duration-300 ${
+                  activeSection === section ? "opacity-100" : "opacity-0"
+                }`}
+              />
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+            </a>
+          ))}
+        </nav>
+      </motion.aside>
 
       {/* Main Content */}
       <motion.main
@@ -630,7 +650,7 @@ export default function Home() {
             ].map((skill) => (
               <div
                 key={skill.name}
-                className="flip-card w-full h-36 sm:h-40 bg-transparent border border-emerald-400 rounded-xl"
+                className="flip-card w-full h-36 sm:h-40 bg-transparent border border-emerald-400 rounded-xl text-x"
               >
                 <div className="flip-inner w-full h-full">
                   {/* Front Side */}
@@ -645,7 +665,7 @@ export default function Home() {
                     <img
                       src={skill.icon}
                       alt={skill.name}
-                      className="w-16 h-16 object-contain"
+                      className="w-24 h-25 object-contain"
                     />
                   </div>
                 </div>
