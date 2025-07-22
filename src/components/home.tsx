@@ -1,246 +1,365 @@
-import React, { useState } from "react";
-import { Moon, Sun, ChevronDown } from "lucide-react";
-import { Button } from "./ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
-import ProjectsShowcase from "./ProjectsShowcase";
-import SkillsSection from "./SkillsSection";
-import ContactSection from "./ContactSection";
-import { TypeAnimation } from "react-type-animation";
-import { PixelTrail } from "../fancy/components/background/pixel-trail";
+"use client";
 
-const Home = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useInView } from "react-intersection-observer";
+import { useEffect, useState } from "react";
+import { Player } from "@lottiefiles/react-lottie-player";
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    // In a real implementation, this would update the document class or a theme context
-    document.documentElement.classList.toggle("dark");
-  };
+// Define all sections for navigation tracking
+const sections = ["intro", "work", "experience", "skills", "contact"];
+
+export default function Home() {
+  // State to track the currently active section
+  const [activeSection, setActiveSection] = useState("intro");
+
+  // Update active section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      let current = "intro";
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top < window.innerHeight / 2) {
+          current = id;
+        }
+      }
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const { ref: workRef, inView: workInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
 
   return (
-    <div className={`min-h-screen bg-background ${isDarkMode ? "dark" : ""}`}>
-      {/* Navigation */}
-      <header className="sticky top-0 z-10 bg-background border-b border-border py-4 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="font-bold text-xl">DevPortfolio</div>
-          <nav className="hidden md:flex space-x-6">
-            <a href="#home" className="hover:text-primary transition-colors">
-              Home
-            </a>
-            <a
-              href="#projects"
-              className="hover:text-primary transition-colors"
-            >
-              Projects
-            </a>
-            <a href="#skills" className="hover:text-primary transition-colors">
-              Skills
-            </a>
-            <a href="#contact" className="hover:text-primary transition-colors">
-              Contact
-            </a>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-            >
-              {isDarkMode ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </Button>
-            <a
-              href="https://calendly.com/sahilsagvekar230/meet"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button size="lg" className="font-medium">
-                Hire Me
-              </Button>
-            </a>
-          </div>
-        </div>
-      </header>
+    
+    <section className="min-h-screen bg-[#0e0e0e] text-white flex flex-col md:flex-row">
 
-      {/* Hero Section */}
-      <section id="home" className="py-20 md:py-32 px-6 md:px-12 bg-background">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            {/* <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              Hi, I'm <span className="text-primary">Alex</span> <br />
-              Freelance Web Developer
-            </h1> */}
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
-              Hi, I'm <span className="text-primary">Sahil</span>
-              <br />
-              <TypeAnimation
-                sequence={[
-                  "Freelance Web Developer",
-                  2000,
-                  "React & Next.js Expert",
-                  2000,
-                  "Beautiful UI, Lightning Fast Code",
-                  2000,
-                  "Custom Websites for Your Business",
-                  2000,
-                ]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
-                className="text-primary"
+      <motion.div
+  animate={{
+    y: [0, -10, 0],
+    scale: [1, 1.05, 1],
+  }}
+  transition={{
+    repeat: Infinity,
+    duration: 2,
+    ease: "easeInOut",
+  }}
+  className="fixed z-50 top-10 left-6 sm:right-10 sm:left-auto bg-gradient-to-r from-emerald-400 to-cyan-500 px-6 py-3 rounded-full shadow-lg"
+>
+  <a
+    href="https://calendly.com/your-calendly-link"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Button className="text-white text-base font-semibold hover:scale-105 transition-transform duration-300">
+      Hire Me
+    </Button>
+  </a>
+</motion.div>
+
+      {/* Sidebar Navigation */}
+      <motion.aside
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="md:w-1/4 w-full px-6 py-8"
+      >
+        <h1 className="text-base font-semibold tracking-wide mb-10 fixed text-gray-300">
+          SAHIL SAGVEKAR
+        </h1>
+        
+        <nav className="space-y-2 text-sm p-6 mt-32 fixed left-0 top-20 w-52">
+          {sections.map((section) => (
+            <a
+              href={`#${section}`}
+              key={section}
+              className={`relative block px-4 py-2 rounded-lg transition-all duration-300 transform ${
+                activeSection === section
+                  ? "text-emerald-400 font-semibold scale-[1.03]"
+                  : "text-gray-500 hover:text-emerald-400 hover:scale-[1.01]"
+              }`}
+            >
+              <span
+                className={`absolute left-0 top-0 h-full w-1 bg-emerald-400 rounded transition-all duration-300 ${
+                  activeSection === section ? "opacity-100" : "opacity-0"
+                }`}
               />
-            </h1>
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+            </a>
+          ))}
+        </nav>
+      </motion.aside>
 
-            <p className="text-lg text-muted-foreground">
-              I create beautiful, responsive websites and web applications that
-              help businesses grow online.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              {/* <Button size="lg" className="font-medium">
-                View My Work
-              </Button> */}
-              <Button
-                size="lg"
-                className="font-medium"
-                onClick={() => {
-                  const section = document.getElementById("projects");
-                  if (section) {
-                    section.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
+      {/* Main Content */}
+      <motion.main
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+        className="flex-1 flex flex-col justify-start p-6"
+      >
+        {/* Intro Section */}
+        <div id="intro" className="mr-60 pl-50 min-h-[90vh] flex items-center">
+          <div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-emerald-400 text-sm font-medium"
+            >
+              <span className="animate-blink">●</span> Open to New Projects
+            </motion.p>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mt-3 mb-8"
+            >
+              Engineering seamless digital experiences with precision.
+            </motion.h2>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="flex gap-4 mt-4"
+            >
+              <button className="bg-emerald-400 hover:bg-emerald-300 text-black font-semibold py-3 px-6 rounded-full shadow-lg transition-all duration-300">
+                Get in touch
+              </button>
+              <button className="border border-emerald-400 text-emerald-400 hover:bg-emerald-900 font-semibold py-3 px-6 rounded-full transition-all duration-300">
+                My work
+              </button>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Work Section */}
+        <motion.section
+          id="work"
+          ref={workRef}
+          initial={{ opacity: 0, y: 30 }}
+          animate={workInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex-1 flex flex-col justify-start p-6 min-h-screen border-t border-gray-800 pt-20 bg-[#0e0e0e] pr-56 pl-0"
+        >
+          <h3 className="text-4xl md:text-5xl font-bold mb-16 text-white">
+            My Work
+          </h3>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {[...Array(6)].map((_, index) => (
+              <div
+                key={index}
+                className="relative rounded-2xl overflow-hidden border border-emerald-400 p-8 bg-[#121212] hover:shadow-[0_0_30px_#34d399] transition-shadow duration-300"
               >
-                View My Work
-              </Button>
-              {/* <Button size="lg" variant="outline" className="font-medium">
-                Contact Me
-              </Button> */}
-              <Button
-                size="lg"
-                variant="outline"
-                className="font-medium"
-                onClick={() => {
-                  const section = document.getElementById("contact");
-                  if (section) {
-                    section.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-              >
-                Contact Me
-              </Button>
+                <div className="absolute top-4 right-4 text-emerald-400 text-xl">
+                  ↗
+                </div>
+                <h4 className="text-2xl font-bold text-white mb-4">
+                  SampleFlat
+                </h4>
+                <p className="text-gray-400 text-sm">
+                  A full-fledged real estate marketplace with buyer-seller video
+                  calls, bookings, and Stripe payments.
+                </p>
+                <p className="text-gray-500 text-xs mt-4">2024 | Full-stack</p>
+              </div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Experience Section */}
+        <motion.section
+          id="experience"
+          ref={workRef}
+          initial={{ opacity: 0, y: 30 }}
+          animate={workInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="min-h-screen bg-[#0e0e0e] text-white px-6 md:px-24 py-20 border-t border-emerald-400"
+        >
+          <h2 className="font-sans text-4xl md:text-5xl font-bold mb-20">
+            Work experience
+          </h2>
+
+          <div className="flex flex-col md:flex-row items-start gap-12">
+            {/* Left: Experience List */}
+            <div className="w-full md:w-1/2 space-y-16">
+              {[
+                {
+                  company: "Homeville Group",
+                  role: "Software Engineer - 1",
+                  description:
+                    "Worked as a Software Development Engineer - I at Homeville, contributing to the development and maintenance of scalable fintech applications.",
+                },
+                {
+                  company: "NullClass",
+                  role: "Web Development Intern",
+                  description:
+                    "Built and deployed MERN-based web applications with real-time CRUD functionality.",
+                },
+                {
+                  company: "Business Web Solutions",
+                  role: "Web Development Intern",
+                  description:
+                    "Contributed to fullstack modules while learning MERN stack fundamentals.",
+                },
+              ].map((exp, i) => (
+                <div className="flex items-start gap-6" key={i}>
+                  <div>
+                    <h3 className="text-xl font-semibold">{exp.company}</h3>
+                    <p className="text-gray-400 font-medium text-sm mb-2">
+                      {exp.role}
+                    </p>
+                    <p className="text-gray-400 text-sm max-w-2xl">
+                      {exp.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Right: Animation */}
+            <div className="w-full md:w-1/2 flex justify-center items-center">
+              {/* this one */}
+              <Player
+                autoplay
+                loop
+                src="https://assets1.lottiefiles.com/packages/lf20_4kx2q32n.json"
+                style={{ height: "300px", width: "300px" }}
+              />
             </div>
           </div>
-          <div className="flex justify-center">
-            <div className="relative">
-              <div className="absolute -z-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
-              <Avatar className="w-64 h-64 border-4 border-primary/20">
-                <AvatarImage src="/me.png" alt="Developer Avatar" />
-                <AvatarFallback>AD</AvatarFallback>
-              </Avatar>
+        </motion.section>
+
+        {/* Skills Section */}
+        <motion.section
+          id="skills"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="min-h-screen bg-[#0e0e0e] text-white px-6 md:px-24 py-20 border-t border-emerald-400"
+        >
+          <h2 className="font-sans text-4xl md:text-5xl font-bold mb-20">
+            Skills
+          </h2>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+            {[
+              { name: "JavaScript", icon: "/icons/js.png" },
+              { name: "React", icon: "/icons/react.jpg" },
+              { name: "Next.js", icon: "/icons/next.png" },
+              { name: "Node.js", icon: "/icons/node.png" },
+              { name: "TypeScript", icon: "/icons/ts.png" },
+              { name: "MongoDB", icon: "/icons/mongodb.png" },
+              { name: "Tailwind CSS", icon: "/icons/tailwind.jpg" },
+              { name: "Express.js", icon: "/icons/express.png" },
+            ].map((skill, index) => (
+              <div
+                key={skill.name}
+                className="flip-card w-full h-40 bg-transparent border border-emerald-400 rounded-xl"
+              >
+                <div className="flip-inner w-full h-full">
+                  {/* Front Side */}
+                  <div className="flip-front bg-[#121212] text-center flex items-center justify-center">
+                    <p className="text-white font-medium text-sm">
+                      {skill.name}
+                    </p>
+                  </div>
+
+                  {/* Back Side */}
+                  <div className="flip-back bg-[#121212] flex items-center justify-center">
+                    <img
+                      src={skill.icon}
+                      alt={skill.name}
+                      className="w-29 h-29 object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Contact Section */}
+        <section
+          id="contact"
+          className="px-6 md:px-24 py-24 text-white border-t border-emerald-400 bg-[#0e0e0e]"
+        >
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+            {/* Left: Contact Form */}
+            <div className="flex-1 w-full">
+              <h2 className="text-3xl font-bold text-emerald-400 mb-8">
+                Let’s work together
+              </h2>
+
+              <p className="text-lg text-gray-300 mb-8 max-w-2xl">
+                Whether you have a question, want to collaborate, or just want
+                to say hi — feel free to drop a message. I’ll try my best to get
+                back to you!
+              </p>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-semibold mb-2 text-gray-300">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    placeholder="Your Name"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold mb-2 text-gray-300">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    placeholder="your@email.com"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold mb-2 text-gray-300">
+                    Message
+                  </label>
+                  <textarea
+                    className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white h-32 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    placeholder="Let's talk about your next project..."
+                  ></textarea>
+                </div>
+
+                <button className="mt-4 bg-emerald-400 text-black px-6 py-3 rounded-md font-semibold hover:bg-emerald-500 transition-colors duration-300">
+                  Send Message
+                </button>
+              </div>
+            </div>
+
+            {/* Right: Image */}
+            <div className="flex-1 w-full max-w-md">
+              <div className="flex-1 w-full max-w-md">
+                <Player
+                  autoplay
+                  loop
+                  src="https://assets5.lottiefiles.com/packages/lf20_zrqthn6o.json"
+                  style={{ height: "100%", width: "100%" }}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="max-w-7xl mx-auto mt-20 flex justify-center">
-          <Button
-            variant="ghost"
-            className="flex items-center gap-2"
-            onClick={() =>
-              document
-                .getElementById("projects")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            Scroll Down <ChevronDown className="h-4 w-4" />
-          </Button>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-6 md:px-12 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">My Projects</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Check out some of my recent work. I specialize in creating
-              responsive, user-friendly websites and applications.
-            </p>
-          </div>
-          <ProjectsShowcase />
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-6 md:px-12 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">My Skills</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              I've worked with a variety of technologies and tools throughout my
-              career. Here's a snapshot of my technical expertise.
-            </p>
-          </div>
-          <SkillsSection />
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      {/* <section id="contact" className="py-20 px-6 md:px-12 bg-muted/30"> */}
-      {/* <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Get In Touch
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Have a project in mind? Let's discuss how I can help bring your
-              ideas to life. Fill out the form below and I'll get back to you
-              soon.
-            </p>
-          </div>  */}
-      <ContactSection />
-      {/* </div>
-      </section>  */}
-
-      {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 bg-background border-t border-border">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} DevPortfolio. All rights reserved.
-            </p>
-          </div>
-          <div className="flex space-x-6">
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              Twitter
-            </a>
-          </div>
-        </div>
-      </footer>
-    </div>
+        </section>
+      </motion.main>
+    </section>
   );
-};
-
-export default Home;
+}
