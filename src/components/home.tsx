@@ -13,7 +13,6 @@ import axios from "axios";
 const sections = ["intro", "work", "experience", "skills", "contact"];
 
 export default function Home() {
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -85,61 +84,63 @@ export default function Home() {
 
   return (
     <section className="min-h-screen bg-[#0e0e0e] text-white flex flex-col md:flex-row">
-      <motion.div
-        animate={{
-          y: [0, -10, 0],
-          scale: [1, 1.05, 1],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 2,
-          ease: "easeInOut",
-        }}
-        className="fixed z-50 top-10 left-6 sm:right-10 sm:left-auto bg-gradient-to-r from-emerald-400 to-cyan-500 px-6 py-3 rounded-full shadow-lg"
-      >
-        <a
-          href="https://calendly.com/sahilsagvekar230/new-meeting-1"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button className="text-white text-base font-semibold hover:scale-105 transition-transform duration-300">
-            Hire Me
-          </Button>
-        </a>
-      </motion.div>
+      {/* Floating "Hire Me" Button */}
+<motion.div
+  animate={{
+    y: [0, -10, 0],
+    scale: [1, 1.05, 1],
+  }}
+  transition={{
+    repeat: Infinity,
+    duration: 2,
+    ease: "easeInOut",
+  }}
+  className="fixed z-50 top-4 left-4 sm:top-10 sm:left-auto sm:right-10 bg-gradient-to-r from-emerald-400 to-cyan-500 px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-lg"
+>
+  <a
+    href="https://calendly.com/sahilsagvekar230/new-meeting-1"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Button className="text-white text-sm sm:text-base font-semibold hover:scale-105 transition-transform duration-300">
+      Hire Me
+    </Button>
+  </a>
+</motion.div>
 
-      {/* Sidebar Navigation */}
-      <motion.aside
-        initial={{ x: -100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="md:w-1/4 w-full px-6 py-8"
-      >
-        <h1 className="text-base font-semibold tracking-wide mb-10 fixed text-gray-300">
-          SAHIL SAGVEKAR
-        </h1>
+{/* Sidebar Navigation (Hidden on small screens) */}
+<motion.aside
+  initial={{ x: -100, opacity: 0 }}
+  animate={{ x: 0, opacity: 1 }}
+  transition={{ duration: 0.8, ease: "easeOut" }}
+  className="hidden md:block md:w-1/4 px-6 py-8"
+>
+  <h1 className="text-base font-semibold tracking-wide mb-10 fixed text-gray-300">
+    SAHIL SAGVEKAR
+  </h1>
 
-        <nav className="space-y-2 text-sm p-6 mt-32 fixed left-0 top-20 w-52">
-          {sections.map((section) => (
-            <a
-              href={`#${section}`}
-              key={section}
-              className={`relative block px-4 py-2 rounded-lg transition-all duration-300 transform ${
-                activeSection === section
-                  ? "text-emerald-400 font-semibold scale-[1.03]"
-                  : "text-gray-500 hover:text-emerald-400 hover:scale-[1.01]"
-              }`}
-            >
-              <span
-                className={`absolute left-0 top-0 h-full w-1 bg-emerald-400 rounded transition-all duration-300 ${
-                  activeSection === section ? "opacity-100" : "opacity-0"
-                }`}
-              />
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </a>
-          ))}
-        </nav>
-      </motion.aside>
+  <nav className="space-y-2 text-sm p-6 mt-32 fixed left-0 top-20 w-52">
+    {sections.map((section) => (
+      <a
+        href={`#${section}`}
+        key={section}
+        className={`relative block px-4 py-2 rounded-lg transition-all duration-300 transform ${
+          activeSection === section
+            ? "text-emerald-400 font-semibold scale-[1.03]"
+            : "text-gray-500 hover:text-emerald-400 hover:scale-[1.01]"
+        }`}
+      >
+        <span
+          className={`absolute left-0 top-0 h-full w-1 bg-emerald-400 rounded transition-all duration-300 ${
+            activeSection === section ? "opacity-100" : "opacity-0"
+          }`}
+        />
+        {section.charAt(0).toUpperCase() + section.slice(1)}
+      </a>
+    ))}
+  </nav>
+</motion.aside>
+
 
       {/* Main Content */}
       <motion.main
@@ -149,8 +150,11 @@ export default function Home() {
         className="flex-1 flex flex-col justify-start p-6"
       >
         {/* Intro Section */}
-        <div id="intro" className="mr-60 pl-50 min-h-[90vh] flex items-center">
-          <div>
+        <div
+          id="intro"
+          className="min-h-[90vh] flex items-center px-4 sm:px-10 md:px-20"
+        >
+          <div className="w-full">
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -164,7 +168,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mt-3 mb-8"
+              className="text-2xl sm:text-3xl md:text-5xl font-bold leading-tight tracking-tight mt-3 mb-6"
             >
               Engineering seamless digital experiences with precision.
             </motion.h2>
@@ -173,17 +177,18 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="flex gap-4 mt-4"
+              className="flex flex-col sm:flex-row gap-4"
             >
               <button
                 onClick={() => {
                   const el = document.getElementById("contact");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="bg-emerald-400 hover:bg-emerald-300 text-black font-semibold py-3 px-6 rounded-full shadow-lg transition-all duration-300"
+                className="bg-emerald-400 hover:bg-emerald-300 text-black font-semibold py-3 px-6 rounded-full shadow-md transition-all duration-300"
               >
                 Get in touch
               </button>
+
               <button
                 onClick={() => {
                   const el = document.getElementById("experience");
@@ -204,13 +209,12 @@ export default function Home() {
           initial={{ opacity: 0, y: 30 }}
           animate={workInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex-1 flex flex-col justify-start p-6 min-h-screen border-t border-gray-800 pt-20 bg-[#0e0e0e] pr-56 pl-0"
+          className="flex-1 flex flex-col justify-start px-4 sm:px-6 md:px-10 lg:px-20 min-h-screen border-t border-gray-800 pt-20 bg-[#0e0e0e]"
         >
-          <h3 className="text-4xl md:text-5xl font-bold mb-16 text-white">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 text-white">
             My Work
           </h3>
-
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12">
             {/* Project 1 */}
             <div className="relative rounded-2xl overflow-hidden border border-emerald-400 p-8 bg-[#121212] hover:shadow-[0_0_30px_#34d399] transition-shadow duration-300">
               {/* Icons for links */}
@@ -315,7 +319,8 @@ export default function Home() {
               </p>
               <p className="text-gray-500 text-xs mt-4">
                 {" "}
-                Technologies Used | Next, TailwindCSS, stripe, Aceternity UI, shadcn/ui
+                Technologies Used | Next, TailwindCSS, stripe, Aceternity UI,
+                shadcn/ui
               </p>
             </div>
 
@@ -360,11 +365,18 @@ export default function Home() {
               </div>
 
               {/* Card Content */}
-              <h4 className="text-2xl font-bold text-white mb-4">Artshop Website</h4>
+              <h4 className="text-2xl font-bold text-white mb-4">
+                Artshop Website
+              </h4>
               <p className="text-gray-400 text-sm">
-               Ecommerce store built using next js 14 , sanity for admin dashboard to crud products , stripe for payments and zustand for shopping cart global state management.
+                Ecommerce store built using next js 14 , sanity for admin
+                dashboard to crud products , stripe for payments and zustand for
+                shopping cart global state management.
               </p>
-              <p className="text-gray-500 text-xs mt-4"> Technologies Used | Next, TailwindCSS, stripe, shadcn/ui</p>
+              <p className="text-gray-500 text-xs mt-4">
+                {" "}
+                Technologies Used | Next, TailwindCSS, stripe, shadcn/ui
+              </p>
             </div>
 
             {/* Project 4 */}
@@ -410,10 +422,14 @@ export default function Home() {
               {/* Card Content */}
               <h4 className="text-2xl font-bold text-white mb-4">SampleFlat</h4>
               <p className="text-gray-400 text-sm">
-               TheSampleFlat is a real estate platform that focuses on showcasing new and 
-under-construction properties with immersive video content
+                TheSampleFlat is a real estate platform that focuses on
+                showcasing new and under-construction properties with immersive
+                video content
               </p>
-              <p className="text-gray-500 text-xs mt-4">Technologies Used | Next.js, TypeScript, Tailwind CSS, Prisma, MongoDB, Stripe, Shadcn/UI, Zod, Resend / Nodemailer</p>
+              <p className="text-gray-500 text-xs mt-4">
+                Technologies Used | Next.js, TypeScript, Tailwind CSS, Prisma,
+                MongoDB, Stripe, Shadcn/UI, Zod, Resend / Nodemailer
+              </p>
             </div>
 
             {/* Project 5 */}
@@ -457,11 +473,16 @@ under-construction properties with immersive video content
               </div>
 
               {/* Card Content */}
-              <h4 className="text-2xl font-bold text-white mb-4">Coffee Website</h4>
+              <h4 className="text-2xl font-bold text-white mb-4">
+                Coffee Website
+              </h4>
               <p className="text-gray-400 text-sm">
-                Bueatifully designed coffee website with a modern UI, showcasing various coffee products and their details.
+                Bueatifully designed coffee website with a modern UI, showcasing
+                various coffee products and their details.
               </p>
-              <p className="text-gray-500 text-xs mt-4">Technologies Used | React, Tailwind CSS</p>
+              <p className="text-gray-500 text-xs mt-4">
+                Technologies Used | React, Tailwind CSS
+              </p>
             </div>
 
             {/* Project 6 */}
@@ -505,11 +526,16 @@ under-construction properties with immersive video content
               </div>
 
               {/* Card Content */}
-              <h4 className="text-2xl font-bold text-white mb-4">React Food App</h4>
+              <h4 className="text-2xl font-bold text-white mb-4">
+                React Food App
+              </h4>
               <p className="text-gray-400 text-sm">
-                A simple food ordering application built with React, showcasing various food items and their details.
+                A simple food ordering application built with React, showcasing
+                various food items and their details.
               </p>
-              <p className="text-gray-500 text-xs mt-4">Technologies Used | React, Tailwind CSS</p>
+              <p className="text-gray-500 text-xs mt-4">
+                Technologies Used | React, Tailwind CSS
+              </p>
             </div>
           </div>
         </motion.section>
@@ -584,14 +610,14 @@ under-construction properties with immersive video content
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          // className="min-h-screen bg-[#0e0e0e] text-white px-6 md:px-24 py-20 border-t border-emerald-400"
-          className="min-h-screen bg-[#0e0e0e] text-white  py-20 border-t border-emerald-400 pl-0 ml-0 mr-10 pr-20"
+          className="min-h-screen bg-[#0e0e0e] text-white px-4 sm:px-6 md:px-12 lg:px-24 py-20 border-t border-emerald-400"
         >
-          <h2 className="font-sans text-4xl md:text-5xl font-bold mb-20">
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-20">
             Skills
           </h2>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+          {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8"> */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
               { name: "JavaScript", icon: "/icons/js.png" },
               { name: "React", icon: "/icons/react.jpg" },
@@ -601,10 +627,10 @@ under-construction properties with immersive video content
               { name: "MongoDB", icon: "/icons/mongodb.png" },
               { name: "Tailwind CSS", icon: "/icons/tailwind.jpg" },
               { name: "Express.js", icon: "/icons/express.png" },
-            ].map((skill, index) => (
+            ].map((skill) => (
               <div
                 key={skill.name}
-                className="flip-card w-full h-40 bg-transparent border border-emerald-400 rounded-xl"
+                className="flip-card w-full h-36 sm:h-40 bg-transparent border border-emerald-400 rounded-xl"
               >
                 <div className="flip-inner w-full h-full">
                   {/* Front Side */}
@@ -619,7 +645,7 @@ under-construction properties with immersive video content
                     <img
                       src={skill.icon}
                       alt={skill.name}
-                      className="w-25 h-21 object-contain"
+                      className="w-16 h-16 object-contain"
                     />
                   </div>
                 </div>
@@ -629,89 +655,91 @@ under-construction properties with immersive video content
         </motion.section>
 
         {/* Contact Section */}
-       <section
-      id="contact"
-      className="px-6 md:px-24 py-24 text-white border-t border-emerald-400 bg-[#0e0e0e]"
-    >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
-        {/* Left: Contact Form */}
-        <div className="flex-1 w-full">
-          <h2 className="text-3xl font-bold text-emerald-400 mb-8">
-            Let’s work together
-          </h2>
+        <section
+          id="contact"
+          className="px-6 md:px-24 py-24 text-white border-t border-emerald-400 bg-[#0e0e0e]"
+        >
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+            {/* Left: Contact Form */}
+            <div className="flex-1 w-full">
+              <h2 className="text-3xl font-bold text-emerald-400 mb-8">
+                Let’s work together
+              </h2>
 
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl">
-            Whether you have a question, want to collaborate, or just want to say hi — feel free to drop a message. I’ll try my best to get back to you!
-          </p>
+              <p className="text-lg text-gray-300 mb-8 max-w-2xl">
+                Whether you have a question, want to collaborate, or just want
+                to say hi — feel free to drop a message. I’ll try my best to get
+                back to you!
+              </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-300">
-                Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                placeholder="Your Name"
-                required
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-sm font-semibold mb-2 text-gray-300">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    placeholder="Your Name"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold mb-2 text-gray-300">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    placeholder="your@email.com"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold mb-2 text-gray-300">
+                    Message
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white h-32 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    placeholder="Let's talk about your next project..."
+                    required
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="mt-4 bg-emerald-400 text-black px-6 py-3 rounded-md font-semibold hover:bg-emerald-500 transition-colors duration-300"
+                  disabled={loading}
+                >
+                  {loading ? "Sending..." : "Send Message"}
+                </button>
+
+                {responseMsg && <p className="text-sm mt-2">{responseMsg}</p>}
+              </form>
+            </div>
+
+            {/* Right: Animation */}
+            <div className="flex-1 w-full max-w-md">
+              <Player
+                autoplay
+                loop
+                src="https://assets5.lottiefiles.com/packages/lf20_zrqthn6o.json"
+                style={{ height: "100%", width: "100%" }}
               />
             </div>
-
-            <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-300">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                placeholder="your@email.com"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-300">
-                Message
-              </label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full bg-transparent border border-emerald-400 rounded-md p-3 text-white h-32 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                placeholder="Let's talk about your next project..."
-                required
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              className="mt-4 bg-emerald-400 text-black px-6 py-3 rounded-md font-semibold hover:bg-emerald-500 transition-colors duration-300"
-              disabled={loading}
-            >
-              {loading ? "Sending..." : "Send Message"}
-            </button>
-
-            {responseMsg && <p className="text-sm mt-2">{responseMsg}</p>}
-          </form>
-        </div>
-
-        {/* Right: Animation */}
-        <div className="flex-1 w-full max-w-md">
-          <Player
-            autoplay
-            loop
-            src="https://assets5.lottiefiles.com/packages/lf20_zrqthn6o.json"
-            style={{ height: "100%", width: "100%" }}
-          />
-        </div>
-      </div>
-    </section>
+          </div>
+        </section>
       </motion.main>
     </section>
   );
